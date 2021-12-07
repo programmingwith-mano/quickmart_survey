@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33099/dogs
+    password: Welcome#1
+    username: system
+    driver-class-name: "oracle.jdbc.OracleDriver"
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    hibernate:
+      ddl-auto: update
