@@ -1,4 +1,4 @@
-package com.snipers.survey;
+package com.quickmart.survey;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

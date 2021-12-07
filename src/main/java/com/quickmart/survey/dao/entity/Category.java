@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CATEGORYS")
+@Table(name = "CATEGORIES")
 public class Category extends AduitColumn {
 
 	@Id
