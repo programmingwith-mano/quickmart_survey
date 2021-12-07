@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/QuickMart-Survey/static/css/main.1821182d.chunk.css",
+    "main.js": "/QuickMart-Survey/static/js/main.dafeaa94.chunk.js",
+    "main.js.map": "/QuickMart-Survey/static/js/main.dafeaa94.chunk.js.map",
+    "runtime-main.js": "/QuickMart-Survey/static/js/runtime-main.59f01a4a.js",
+    "runtime-main.js.map": "/QuickMart-Survey/static/js/runtime-main.59f01a4a.js.map",
+    "static/js/2.97213f36.chunk.js": "/QuickMart-Survey/static/js/2.97213f36.chunk.js",
+    "static/js/2.97213f36.chunk.js.map": "/QuickMart-Survey/static/js/2.97213f36.chunk.js.map",
+    "index.html": "/QuickMart-Survey/index.html",
+    "precache-manifest.31e0998e8f2e120f1759628ce49cd707.js": "/QuickMart-Survey/precache-manifest.31e0998e8f2e120f1759628ce49cd707.js",
+    "service-worker.js": "/QuickMart-Survey/service-worker.js",
+    "static/css/main.1821182d.chunk.css.map": "/QuickMart-Survey/static/css/main.1821182d.chunk.css.map",
+    "static/js/2.97213f36.chunk.js.LICENSE.txt": "/QuickMart-Survey/static/js/2.97213f36.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.59f01a4a.js",
+    "static/js/2.97213f36.chunk.js",
+    "static/css/main.1821182d.chunk.css",
+    "static/js/main.dafeaa94.chunk.js"
+  ]
+}
