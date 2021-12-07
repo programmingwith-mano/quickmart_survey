@@ -1,10 +1,10 @@
 spring:
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    password: Welcome#1
-    username: system
-    driver-class-name: "oracle.jdbc.OracleDriver"
+    url: jdbc:mysql://localhost:3306/shivani_labs
+    password: welcome
+    username: root
+    driver-class-name: "com.mysql.jdbc.Driver"
   jpa:
-    database-platform: org.hibernate.dialect.Oracle10gDialect
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: update
