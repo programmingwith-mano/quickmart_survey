@@ -1,6 +1,6 @@
 package com.quickmart.survey.vo;
 
-public final class CategoryTypeVO {
+public class CategoryTypeVO {
 
 	private int categoryTypeId;
 

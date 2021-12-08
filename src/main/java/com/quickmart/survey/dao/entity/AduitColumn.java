@@ -1,6 +1,6 @@
 package com.quickmart.survey.dao.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 
@@ -10,13 +10,13 @@ public class AduitColumn {
 	private int createdBy;
 
 	@Column(name = "CREATED_ON")
-	private LocalDate createdOn;
+	private LocalDateTime createdOn;
 
 	@Column(name = "LAST_MODIFIED_BY")
 	private int lastModifiedBy;
 
 	@Column(name = "LAST_MODIFIED_ON")
-	private LocalDate lastModifiedOn;
+	private LocalDateTime lastModifiedOn;
 
 	public int getCreatedBy() {
 		return createdBy;
@@ -26,11 +26,11 @@ public class AduitColumn {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDate getCreatedOn() {
+	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(LocalDate createdOn) {
+	public void setCreatedOn(LocalDateTime createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -42,12 +42,13 @@ public class AduitColumn {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	public LocalDate getLastModifiedOn() {
+	public LocalDateTime getLastModifiedOn() {
 		return lastModifiedOn;
 	}
 
-	public void setLastModifiedOn(LocalDate lastModifiedOn) {
+	public void setLastModifiedOn(LocalDateTime lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
+	
 }

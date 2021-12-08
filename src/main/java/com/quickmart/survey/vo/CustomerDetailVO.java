@@ -1,6 +1,6 @@
 package com.quickmart.survey.vo;
 
-public final class CustomerDetailVO {
+public class CustomerDetailVO {
 
 	private int customerId;
 

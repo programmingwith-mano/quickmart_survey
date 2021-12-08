@@ -2,16 +2,19 @@ package com.quickmart.survey.dao.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CUSTOMER_DETAILS")
+@Table(name = "QM_CUSTOMER_DETAILS")
 public class CustomerDetail {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CUSTOMER_ID")
-	private int customerId;
+	private Long customerId;
 
 	@Column(name = "FIRST_NAME")
 	private String firstName;
@@ -22,11 +25,11 @@ public class CustomerDetail {
 	@Column(name = "LOCATION")
 	private String location;
 
-	public int getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 
