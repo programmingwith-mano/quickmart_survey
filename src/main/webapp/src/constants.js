@@ -1,0 +1,5 @@
+const constant = {
+    URL: 'localhost:8080',
+    CUSTOMER_DATA: 'CUSTOMER_DATA',
+    CUSTOMER_SELECTED_ITEMS: 'CUSTOMER_SELECTED_ITEMS'
+};

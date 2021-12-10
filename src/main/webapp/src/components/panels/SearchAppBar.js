@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -77,8 +79,26 @@ export default function SearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            
+            {/*<Autocomplete
+              multiple
+              id="tags-outlined"
+              options={props.productList}
+              getOptionLabel={(option) => option.title}
+              defaultValue={[props.productList[13]]}
+              filterSelectedOptions
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="filterSelectedOptions"
+                  placeholder="Favorites"
+                />
+              )}
+            />*/}
+
+
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search Products…"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>

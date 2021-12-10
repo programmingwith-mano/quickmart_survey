@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import SearchAppBar from './SearchAppBar';
+import Button from '@material-ui/core/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -13,21 +14,13 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
-import categoryList from '../data/categorylist';
-import productList from '../data/productlist'; 
+import categoryList from '../../data/categorylist';
+import productList from '../../data/productlist'; 
+import axios from 'axios';
+import { connect, useDispatch } from 'react-redux';
+import constants from '../../constants';
 
-function renderRow(props) {
-  const { index, style, data } = props;
-  const item = this.props.data[this.props.index];
-  return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        <ListItemText primary={`Items ${data}`} />
-        {item}
-      </ListItemButton>
-    </ListItem>
-  );
-}
+let dispatch;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,14 +49,25 @@ function a11yProps(data) {
   };
 }
 
-export default function ProductList() {
+const getAllProducts = () => {
+  axios.get(URL).then((response) => {
+    dispatch({type: constants.CUSTOMER_DATA, customer: response.data});
+  }).catch(error => console.error(`Error: ${error}`));
+}
+
+function ProductList(props) {
+  dispatch = useDispatch();
   const [value, setValue] = useState(0);
   const [categoryList1, setCategoryValues] = useState([]);
   const [productList1, setProductValues] = useState([]);
-  const [checked, setChecked] = useState([1]);
+  const [checked, setChecked] = useState([]);
+
+
   useEffect(() => {
     setCategoryValues(categoryList);
     setProductValues(productList);
+    setChecked(props.selectedItems);
+    //getAllProducts();
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -79,8 +83,18 @@ export default function ProductList() {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
+    props.updateCustomerEntry(newChecked)
     setChecked(newChecked);
+  };
+
+  const back = (e) => {
+    e.preventDefault();
+    props.prevStep();
+  };
+
+  const next = (e) => {
+    e.preventDefault();
+    props.nextStep();
   };
 
   return (
@@ -109,7 +123,7 @@ export default function ProductList() {
         </Tabs>
 
         <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          {productList1.filter(item => item.categoryId == value).map((item) => {
+          {productList1.filter(item => item.categoryId === value).map((item) => {
             const labelId = `checkbox-list-secondary-label-${item.categoryItemId}`;
             return (
               <ListItem
@@ -137,9 +151,24 @@ export default function ProductList() {
             );
           })}
         </List>
-           
       </Box>
     </>
+    <Typography align='center'>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={back}
+      >Back</Button> &nbsp;&nbsp;&nbsp;
+      {checked.length > 0 ? <Button
+          color="primary"
+          variant="contained"
+          onClick={next}
+        >Confirm</Button> : <Button
+        color="primary"
+        variant="contained"
+        onClick={next} disabled
+        >Confirm</Button>}
+      </Typography>
     </MuiThemeProvider>
   );
 }
@@ -149,3 +178,5 @@ TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
+
+export default ProductList;

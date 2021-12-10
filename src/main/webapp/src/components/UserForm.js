@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FormUserDetails from './FormUserDetails';
-import ProductList from './ProductList';
-import Confirm from './Confirm';
+import FormUserDetails from './panels/FormUserDetails';
+import ProductListContainer from './containers/productlistcontainer';
+import Confirm from './panels/Confirm';
 import Success from './Success';
 
 export class UserForm extends Component {
@@ -52,7 +52,7 @@ export class UserForm extends Component {
         );
       case 2:
         return (
-          <ProductList
+          <ProductListContainer
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
