@@ -54,6 +54,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar(props) {
+  let products = Object.values(props.productList);
+  console.log(Object.keys(props.productList));
+  console.log(props.productList);
+  console.log(Object.values(props.productList))
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -76,31 +80,26 @@ export default function SearchAppBar(props) {
             Quick Mart - Survey
           </Typography>
           <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
             
-            {/*<Autocomplete
+            
+            <Autocomplete
               multiple
               id="tags-outlined"
-              options={props.productList}
-              getOptionLabel={(option) => option.title}
-              defaultValue={[props.productList[13]]}
+              options={products}
+              getOptionLabel={(option) => option}
+              defaultValue={[products[13]]}
               filterSelectedOptions
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="filterSelectedOptions"
-                  placeholder="Favorites"
+                  //label="filterSelectedOptions"
+                  placeholder="Search Products.."
                 />
               )}
-            />*/}
-
-
-            <StyledInputBase
-              placeholder="Search Products…"
-              inputProps={{ 'aria-label': 'search' }}
             />
+
+
+            
           </Search>
         </Toolbar>
       </AppBar>

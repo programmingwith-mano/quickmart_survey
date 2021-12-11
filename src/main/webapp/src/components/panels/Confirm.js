@@ -4,17 +4,14 @@ import AppBar from '@material-ui/core/AppBar';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { List, ListItem, ListItemText } from '@material-ui/core/';
 import Button from '@material-ui/core/Button';
+import Typography from '@mui/material/Typography';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export class Confirm extends Component {
-  continue = e => {
+  startOver = e => {
     e.preventDefault();
-    // PROCESS FORM //
-    this.props.nextStep();
-  };
-
-  back = e => {
-    e.preventDefault();
-    this.props.prevStep();
+    this.props.startOver();
+    this.props.reset();
   };
 
   render() {
@@ -29,40 +26,19 @@ export class Confirm extends Component {
             fullWidth
             maxWidth='sm'
           >
-            <AppBar title="Confirm User Data" />
+            <AppBar title="Thank you" />
             <List>
-              <ListItem>
-                <ListItemText primary="First Name" secondary={firstName} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Last Name" secondary={lastName} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Email" secondary={email} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Occupation" secondary={occupation} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="City" secondary={city} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Bio" secondary={bio} />
-              </ListItem>
+              <Typography align='center' variant="h6" gutterBottom component="div">
+                Thank you for your submission
+              </Typography>
             </List>
             <br />
 
             <Button
-              color="secondary"
-              variant="contained"
-              onClick={this.back}
-            >Back</Button>
-
-            <Button
               color="primary"
               variant="contained"
-              onClick={this.continue}
-            >Confirm & Continue</Button>
+              onClick={this.startOver} endIcon={<RefreshIcon />}
+            >Start Over</Button>
           </Dialog>
         </>
       </MuiThemeProvider>

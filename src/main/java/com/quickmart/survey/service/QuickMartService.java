@@ -2,6 +2,7 @@ package com.quickmart.survey.service;
 
 import java.util.List;
 
+import com.quickmart.survey.dao.entity.CustomerDetail;
 import com.quickmart.survey.vo.CategoryTypeVO;
 import com.quickmart.survey.vo.CategoryVO;
 import com.quickmart.survey.vo.ProductVO;
@@ -24,8 +25,12 @@ public interface QuickMartService {
 
 	public ProductVO productFetch(Long productId);
 	
-	public List<ProductVO> productFetchAll();
-	
 	public void productDelete(Long productId);
+	
+	public CustomerDetail saveCustomer(CustomerDetail customerDetail);
+
+	public List<ProductVO> listProducts();
+
+	public List<CategoryVO> listCategories();
 
 }

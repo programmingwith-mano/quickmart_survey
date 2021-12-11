@@ -16,14 +16,18 @@ public class CustomerDetail {
 	@Column(name = "CUSTOMER_ID")
 	private Long customerId;
 
-	@Column(name = "FIRST_NAME")
-	private String firstName;
+	@Column(name = "FULL_NAME")
+	private String fullName;
 
-	@Column(name = "LAST_NAME")
-	private String lastName;
-
-	@Column(name = "LOCATION")
-	private String location;
+	
+	@Column(name = "ADDRESS")
+	private String address;
+	
+	@Column(name = "CITY")
+	private String city;
+	
+	@Column(name = "MOBILE_NUMBER")
+	private String mobileNumber;
 
 	public Long getCustomerId() {
 		return customerId;
@@ -33,28 +37,35 @@ public class CustomerDetail {
 		this.customerId = customerId;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getCity() {
+		return city;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
 }

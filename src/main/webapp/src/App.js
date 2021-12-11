@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserForm } from './components/UserForm';
+import { UserForm } from './components/panels/UserForm';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { AddProduct } from './components/panels/AddProduct';
 import { Provider } from 'react-redux';

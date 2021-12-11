@@ -20,8 +20,14 @@ public class Product extends AduitColumn {
 	private String productName;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CATEGORY_ID", nullable = false)
+	@JoinColumn(name = "CATEGORY_ID", nullable = false, insertable = false, updatable = false)
 	private Category category;
+	
+	@Column(name = "SIZE")
+	private String size;
+	
+	@Column(name = "CATEGORY_ID")
+	private Long categoryId;
 
 	public Long getProductId() {
 		return productId;
@@ -47,4 +53,19 @@ public class Product extends AduitColumn {
 		this.category = category;
 	}
 
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 }

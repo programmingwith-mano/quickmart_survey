@@ -14,13 +14,30 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
-import categoryList from '../../data/categorylist';
-import productList from '../../data/productlist'; 
 import axios from 'axios';
 import { connect, useDispatch } from 'react-redux';
-import constants from '../../constants';
+import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Draggable from 'react-draggable';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 let dispatch;
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,25 +66,25 @@ function a11yProps(data) {
   };
 }
 
-const getAllProducts = () => {
-  axios.get(URL).then((response) => {
-    dispatch({type: constants.CUSTOMER_DATA, customer: response.data});
-  }).catch(error => console.error(`Error: ${error}`));
-}
-
 function ProductList(props) {
   dispatch = useDispatch();
   const [value, setValue] = useState(0);
-  const [categoryList1, setCategoryValues] = useState([]);
-  const [productList1, setProductValues] = useState([]);
   const [checked, setChecked] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    setCategoryValues(categoryList);
-    setProductValues(productList);
+    setIsLoading(true);
     setChecked(props.selectedItems);
-    //getAllProducts();
+
+    (async () => {
+      const result = await axios.get(
+          "http://quickmartsurvey-env.eba-dwrqsghb.ap-south-1.elasticbeanstalk.com/api/quickmart/categories/listproducts"
+          //"http://localhost:5000/api/quickmart/categories/listproducts"
+      );
+      dispatch({type: 'LIST_CATEGORY_PRODUCT', categoryList: result.data.categoryList, productList: result.data.productList});
+      setIsLoading(false);
+    })();
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -94,17 +111,26 @@ function ProductList(props) {
 
   const next = (e) => {
     e.preventDefault();
+    props.submit();
     props.nextStep();
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
     <MuiThemeProvider>
       <>
-      <SearchAppBar/>
+      <SearchAppBar productList={Object.values(props.productList)}/>
         <Box
           sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 600  }}
         >
-          <Tabs
+          {isLoading === false ? <> <Tabs
             orientation="vertical"
             variant="scrollable"
             value={value}
@@ -116,23 +142,23 @@ function ProductList(props) {
             sx={{ borderRight: 1, borderColor: 'divider', maxWidth: 150 }}
           >
             {
-              categoryList1.map((data, index) => (
+              props.categoryList.map((data, index) => (
                 <Tab sx={{ borderBottom: 1, borderColor: 'divider'}} label={data.categoryName} {...a11yProps({data})} value={data.categoryId} />    
               ))
             }
         </Tabs>
-
+        <Paper elevation={0} style={{maxHeight: '100%', overflow: 'auto'}}>
         <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          {productList1.filter(item => item.categoryId === value).map((item) => {
-            const labelId = `checkbox-list-secondary-label-${item.categoryItemId}`;
+          {props.productList.filter(item => item.categoryId === value).map((item) => {
+            const labelId = `checkbox-list-secondary-label-${item.productId}`;
             return (
-              <ListItem
-                key={item.categoryItemId}
+              <ListItem 
+                key={item.productId}
                 secondaryAction={
                   <Checkbox
                     edge="end"
-                    onChange={handleToggle(item.categoryItemId)}
-                    checked={checked.indexOf(item.categoryItemId) !== -1}
+                    onChange={handleToggle(item.productId)}
+                    checked={checked.indexOf(item.productId) !== -1}
                     inputProps={{ 'aria-labelledby': labelId }}
                   />
                 }
@@ -140,17 +166,20 @@ function ProductList(props) {
               >
                 <ListItemButton sx={{ borderBottom: 1, borderColor: 'divider'}}>
                   <ListItemAvatar>
-                    <Avatar
-                      alt={`Avatar n°${item.categoryItemId + 1}`}
-                      src={`/static/images/avatar/${item.categoryItemId + 1}.jpg`}
-                    />
+                  <Avatar>
+                    <ShoppingCartOutlinedIcon />
+                  </Avatar>
+                    {/*<Avatar
+                      alt={`Avatar n°${item.productId + 1}`}
+                      src={`/static/images/avatar/${item.productId + 1}.jpg`}
+                    />*/}
                   </ListItemAvatar>
-                  <ListItemText id={labelId} primary={`${item.categoryItemName}`} secondary={`${item.size}`} />
+                  <ListItemText id={labelId} primary={`${item.productName}`} secondary={`${item.size}`} />
                 </ListItemButton>
               </ListItem>
             );
           })}
-        </List>
+        </List></Paper></> :<div style={{ alignItems: "center", display: "flex", justifyContent: "center", height: "100vh", width: "100vw" }}><CircularProgress /></div>}
       </Box>
     </>
     <Typography align='center'>
@@ -159,11 +188,34 @@ function ProductList(props) {
         variant="outlined"
         onClick={back}
       >Back</Button> &nbsp;&nbsp;&nbsp;
-      {checked.length > 0 ? <Button
-          color="primary"
-          variant="contained"
-          onClick={next}
-        >Confirm</Button> : <Button
+      {checked.length > 0 ? 
+      <>
+        <Button color="primary" variant="contained" onClick={handleClickOpen}>
+          Confirm
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          PaperComponent={PaperComponent}
+          aria-labelledby="draggable-dialog-title"
+        >
+          <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+            Submit
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Do you really want to submit?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button onClick={next}>Submit</Button>
+          </DialogActions>
+        </Dialog>
+      </>
+        : <Button
         color="primary"
         variant="contained"
         onClick={next} disabled

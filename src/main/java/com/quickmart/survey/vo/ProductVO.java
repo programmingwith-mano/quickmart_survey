@@ -1,12 +1,5 @@
 package com.quickmart.survey.vo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
 public class ProductVO {
 
 	private Long productId;
@@ -14,6 +7,8 @@ public class ProductVO {
 	private String productName;
 
 	private Long categoryId;
+	
+	private String size;
 
 	public Long getProductId() {
 		
@@ -38,5 +33,13 @@ public class ProductVO {
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 }

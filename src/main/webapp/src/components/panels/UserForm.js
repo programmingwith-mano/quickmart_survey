@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import FormUserDetails from './panels/FormUserDetails';
-import ProductListContainer from './containers/productlistcontainer';
-import Confirm from './panels/Confirm';
-import Success from './Success';
+import ProductListContainer from '../containers/productlistcontainer';
+import UserFormContainer from '../containers/customercontainer';
+import Confirm from '../panels/Confirm';
+import Success from '../panels/Success';
+import ConfirmContainer from '../containers/confirmcontainer';
 
 export class UserForm extends Component {
   state = {
     step: 1,
-    firstName: '',
-    lastName: '',
-    email: '',
-    occupation: '',
+    fullName: '',
+    mobileNumber: '',
+    address: '',
     city: '',
-    bio: ''
+    errorText: ''
   };
+
+  reset = () => {
+    this.setState({
+      step: 1,
+      fullName: '',
+      mobileNumber: '',
+      address: '',
+      city: '',
+      errorText: ''
+    });
+  }
 
   // Proceed to next step
   nextStep = () => {
@@ -25,6 +36,7 @@ export class UserForm extends Component {
 
   // Go back to prev step
   prevStep = () => {
+    
     const { step } = this.state;
     this.setState({
       step: step - 1
@@ -38,13 +50,13 @@ export class UserForm extends Component {
 
   render() {
     const { step } = this.state;
-    const { firstName, lastName, email, occupation, city, bio } = this.state;
-    const values = { firstName, lastName, email, occupation, city, bio };
+    const { fullName, mobileNumber, address, city, errorText } = this.state;
+    const values = { fullName, mobileNumber, address, city, errorText };
 
     switch (step) {
       case 1:
         return (
-          <FormUserDetails
+          <UserFormContainer
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
@@ -61,9 +73,10 @@ export class UserForm extends Component {
         );
       case 3:
         return (
-          <Confirm
+          <ConfirmContainer
             nextStep={this.nextStep}
             prevStep={this.prevStep}
+            reset={this.reset}
             values={values}
           />
         );

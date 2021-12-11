@@ -1,14 +1,5 @@
 package com.quickmart.survey.vo;
 
-import java.util.List;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
 public class CategoryVO {
 
 	private int categoryId;
@@ -17,6 +8,27 @@ public class CategoryVO {
 
 	private int categoryTypeId;
 
-	private List<ProductVO> productVOList;
+	public int getCategoryId() {
+		return categoryId;
+	}
 
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public int getCategoryTypeId() {
+		return categoryTypeId;
+	}
+
+	public void setCategoryTypeId(int categoryTypeId) {
+		this.categoryTypeId = categoryTypeId;
+	}
 }

@@ -5,9 +5,15 @@ import {Typography, Button} from '@material-ui/core';
 import ButtonAppBar from './ButtonAppBar';
 
 export class FormUserDetails extends Component {
+  
   continue = e => {
-    e.preventDefault();
-    this.props.nextStep();
+      this.props.saveCustomerEntry(this.props.values);
+      e.preventDefault();
+      this.props.nextStep();
+  };
+
+  updateValue = input => e => {
+    this.setState({ [input]: e.target.value });
   };
 
   render() {
@@ -21,38 +27,51 @@ export class FormUserDetails extends Component {
               Customer Details
           </Typography>
           <TextField
-              placeholder="Enter Your First Name"
-              label="First Name"
-              onChange={handleChange('firstName')}
-              defaultValue={values.firstName}
+              required
+              placeholder="Enter Full Name"
+              label="Full Name"
+              onChange={handleChange('fullName')}
+              defaultValue={values.fullName}
               margin="normal"
               fullWidth
           />
           <br />
           <TextField
-              placeholder="Enter Your Last Name"
-              label="Last Name"
-              onChange={handleChange('lastName')}
-              defaultValue={values.lastName}
+              placeholder="Enter Address"
+              label="Address"
+              onChange={handleChange('address')}
+              defaultValue={values.address}
               margin="normal"
               fullWidth
           />
           <br />
           <TextField
-              placeholder="Enter Your District"
-              label="District"
-              onChange={handleChange('district')}
-              defaultValue={values.district}
+              placeholder="Enter City"
+              label="City"
+              onChange={handleChange('city')}
+              defaultValue={values.city}
+              margin="normal"
+              fullWidth
+          />
+          <TextField
+              placeholder="Enter Mobile Number"
+              label="Mobile Number"
+              onChange={handleChange('mobileNumber')}
+              defaultValue={values.mobileNumber}
               margin="normal"
               fullWidth
           />
           <br /><br /><br />
           <Typography align='center'>
-            <Button
+            {this.props.values.fullName === "" ? <Button
               color="primary"
               variant="contained"
-              onClick={this.continue}
-            >Continue</Button>
+              onClick={this.continue} disabled
+            >Continue</Button> : <Button
+            color="primary"
+            variant="contained"
+            onClick={this.continue}
+          >Continue</Button>}
           </Typography>
         </>
       </MuiThemeProvider>
