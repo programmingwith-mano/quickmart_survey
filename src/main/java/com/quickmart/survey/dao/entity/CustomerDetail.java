@@ -19,13 +19,12 @@ public class CustomerDetail {
 	@Column(name = "FULL_NAME")
 	private String fullName;
 
-	
 	@Column(name = "ADDRESS")
 	private String address;
-	
+
 	@Column(name = "CITY")
 	private String city;
-	
+
 	@Column(name = "MOBILE_NUMBER")
 	private String mobileNumber;
 

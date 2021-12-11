@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quickmart.survey.dao.entity.CustomerDetail;
 import com.quickmart.survey.handler.CustomerDetailsHandler;
+import com.quickmart.survey.vo.RequestVO;
 
-@CrossOrigin(origins = "http://localhost:5000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/quickmart/customers")
 public final class CustomerSurveyController {
@@ -31,4 +32,9 @@ public final class CustomerSurveyController {
 		return ResponseEntity.status(HttpStatus.OK).body(customerDetail);
 	}
 
+	@PostMapping("/transaction")
+	public void customerTransactionSave(@RequestBody RequestVO requestVO) {
+		customerDetailsHandler.customerTransactionSave(requestVO);
+	}
+	
 }

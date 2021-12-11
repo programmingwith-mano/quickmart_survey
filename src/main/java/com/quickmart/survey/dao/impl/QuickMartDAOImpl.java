@@ -10,13 +10,14 @@ import com.quickmart.survey.dao.QuickMartDAO;
 import com.quickmart.survey.dao.entity.Category;
 import com.quickmart.survey.dao.entity.CategoryType;
 import com.quickmart.survey.dao.entity.CustomerDetail;
+import com.quickmart.survey.dao.entity.CustomerTransaction;
 import com.quickmart.survey.dao.entity.Product;
 import com.quickmart.survey.dao.impl.repositories.CategoryJPARepository;
 import com.quickmart.survey.dao.impl.repositories.CategoryTypeJPARepository;
 import com.quickmart.survey.dao.impl.repositories.CustomerJPARepository;
+import com.quickmart.survey.dao.impl.repositories.CustomerTransactionJPARepository;
 import com.quickmart.survey.dao.impl.repositories.ProductJPARepository;
 import com.quickmart.survey.mapper.QuickMartMapper;
-import com.quickmart.survey.vo.ProductVO;
 
 @Component("quickMartDAO")
 public class QuickMartDAOImpl implements QuickMartDAO {
@@ -27,12 +28,14 @@ public class QuickMartDAOImpl implements QuickMartDAO {
 	@Autowired
 	CategoryTypeJPARepository categoryTypeJPARepository;
 
-	
 	@Autowired
 	ProductJPARepository productJPARepository;
-	
+
 	@Autowired
 	private CustomerJPARepository customerJPARepository;
+
+	@Autowired
+	private CustomerTransactionJPARepository customerTransactionJPARepository;
 
 	@Autowired
 	QuickMartMapper quickMartMapper;
@@ -96,6 +99,12 @@ public class QuickMartDAOImpl implements QuickMartDAO {
 	@Override
 	public List<Category> listCategories() {
 		return (List<Category>) categoryJPARepository.findAll();
+	}
+
+	@Override
+	public void customerTransactionSave(Long customerId, List<CustomerTransaction> customerTransactionlist) {
+		customerTransactionlist.stream().forEach(transcation-> transcation.setCustomerId(customerId));
+		customerTransactionJPARepository.saveAll(customerTransactionlist);
 	}
 
 }

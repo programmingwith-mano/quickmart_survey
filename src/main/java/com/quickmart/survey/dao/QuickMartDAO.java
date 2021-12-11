@@ -5,6 +5,7 @@ import java.util.List;
 import com.quickmart.survey.dao.entity.Category;
 import com.quickmart.survey.dao.entity.CategoryType;
 import com.quickmart.survey.dao.entity.CustomerDetail;
+import com.quickmart.survey.dao.entity.CustomerTransaction;
 import com.quickmart.survey.dao.entity.Product;
 
 public interface QuickMartDAO {
@@ -33,4 +34,7 @@ public interface QuickMartDAO {
 	
 	// Customer Details
 	public CustomerDetail saveCustomer(CustomerDetail customerDetail);
+	
+	public void customerTransactionSave(Long customerId, List<CustomerTransaction> customerTransactionlist);
+	
 }

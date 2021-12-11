@@ -4,11 +4,13 @@ public class CustomerDetailVO {
 
 	private int customerId;
 
-	private String firstName;
+	private String fullName;
 
-	private String lastName;
+	private String address;
 
-	private String location;
+	private String city;
+
+	private String mobileNumber;
 
 	public int getCustomerId() {
 		return customerId;
@@ -18,28 +20,36 @@ public class CustomerDetailVO {
 		this.customerId = customerId;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getCity() {
+		return city;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
 }

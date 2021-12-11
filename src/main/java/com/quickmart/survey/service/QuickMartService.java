@@ -6,6 +6,7 @@ import com.quickmart.survey.dao.entity.CustomerDetail;
 import com.quickmart.survey.vo.CategoryTypeVO;
 import com.quickmart.survey.vo.CategoryVO;
 import com.quickmart.survey.vo.ProductVO;
+import com.quickmart.survey.vo.RequestVO;
 
 public interface QuickMartService {
 
@@ -32,5 +33,7 @@ public interface QuickMartService {
 	public List<ProductVO> listProducts();
 
 	public List<CategoryVO> listCategories();
+	
+	public void customerTransactionSave(RequestVO requestVO);
 
 }

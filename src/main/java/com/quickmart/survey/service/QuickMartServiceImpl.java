@@ -9,11 +9,13 @@ import com.quickmart.survey.dao.QuickMartDAO;
 import com.quickmart.survey.dao.entity.Category;
 import com.quickmart.survey.dao.entity.CategoryType;
 import com.quickmart.survey.dao.entity.CustomerDetail;
+import com.quickmart.survey.dao.entity.CustomerTransaction;
 import com.quickmart.survey.dao.entity.Product;
 import com.quickmart.survey.mapper.QuickMartMapper;
 import com.quickmart.survey.vo.CategoryTypeVO;
 import com.quickmart.survey.vo.CategoryVO;
 import com.quickmart.survey.vo.ProductVO;
+import com.quickmart.survey.vo.RequestVO;
 
 @Component("quickMartService")
 public class QuickMartServiceImpl implements QuickMartService {
@@ -90,6 +92,14 @@ public class QuickMartServiceImpl implements QuickMartService {
 	public List<CategoryVO> listCategories() {
 		List<Category> categoryList = quickMartDAO.listCategories();
 		return quickMartMapper.convertToCategoryVOList(categoryList);
+	}
+
+	@Override
+	public void customerTransactionSave(RequestVO requestVO) {
+		CustomerDetail customerDetail = quickMartMapper.convertCustomerDetailVOToEntity(requestVO.getCustomerData());
+		customerDetail = quickMartDAO.saveCustomer(customerDetail);
+		List<CustomerTransaction> customerTransactionList = quickMartMapper.convertToCustomerTransactionList(requestVO.getCustomerTransactionVO());
+		quickMartDAO.customerTransactionSave(customerDetail.getCustomerId(), customerTransactionList);
 	}
 
 }

@@ -17,7 +17,7 @@ public class CustomerTransaction {
 	private Long transactionId;
 
 	@Column(name = "CUSTOMER_ID")
-	private String customerId;
+	private Long customerId;
 
 	@Column(name = "CATEGORY_ID")
 	private Long categoryId;
@@ -33,11 +33,11 @@ public class CustomerTransaction {
 		this.transactionId = transactionId;
 	}
 
-	public String getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 
