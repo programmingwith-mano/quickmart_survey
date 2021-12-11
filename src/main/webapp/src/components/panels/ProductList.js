@@ -92,6 +92,7 @@ function ProductList(props) {
   };
 
   const handleToggle = (value) => () => {
+    console.log('Enteringggggggggggggggggggggggg');
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -126,10 +127,12 @@ function ProductList(props) {
   return (
     <MuiThemeProvider>
       <>
-      <SearchAppBar productList={Object.values(props.productList)}/>
+      <SearchAppBar productList={Object.values(props.productList)} handleToggle={handleToggle}/>
         <Box
           sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 600  }}
         >
+          {props.isTransactionProgress === true ?<div style={{ alignItems: "center", display: "flex", justifyContent: "center", height: "100vh", width: "100vw" }}><CircularProgress /></div>: ''}
+
           {isLoading === false ? <> <Tabs
             orientation="vertical"
             variant="scrollable"

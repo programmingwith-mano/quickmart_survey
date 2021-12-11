@@ -6,7 +6,8 @@ const initialState = {
     selectedItems: [],
     transactionDetails:[],
     productList:[],
-    categoryList:[]
+    categoryList:[],
+    isTransactionProgress: false
 };
 
 export default function customer(state = initialState, action) {
@@ -24,8 +25,10 @@ export default function customer(state = initialState, action) {
                 productList: action.productList,
                 categoryList: action.categoryList
             }
-        case 'DUMMY':
-            return {...state};
+        case 'TRANSACTION_STARTED':
+            return {...state, isTransactionProgress: true};
+        case 'TRANSACTION_SAVED':
+            return {...state, isTransactionProgress: false};
         case 'CLEAR_DATA':
             return initialState;
         default:
