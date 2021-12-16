@@ -3,6 +3,7 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {Typography, Button} from '@material-ui/core';
 import ButtonAppBar from './ButtonAppBar';
+import Autocomplete from '@mui/material/Autocomplete';
 
 export class FormUserDetails extends Component {
   
@@ -18,6 +19,7 @@ export class FormUserDetails extends Component {
 
   render() {
     const { values, handleChange } = this.props;
+
     return (
       <MuiThemeProvider>
         <>
@@ -45,15 +47,16 @@ export class FormUserDetails extends Component {
               fullWidth
           />
           <br />
-          <TextField
-              placeholder="Enter City"
-              label="City"
-              onChange={handleChange('city')}
-              defaultValue={values.city}
-              margin="normal"
-              fullWidth
+          <Autocomplete
+            required
+            disablePortal
+            fullWidth
+            id="combo-box-demo"
+            options={top100Films}
+            renderInput={(params) => <TextField {...params} label="District" />}
           />
           <TextField
+              required
               placeholder="Enter Mobile Number"
               label="Mobile Number"
               onChange={handleChange('mobileNumber')}
@@ -64,11 +67,11 @@ export class FormUserDetails extends Component {
           <br /><br /><br />
           <Typography align='center'>
             {this.props.values.fullName === "" ? <Button
-              color="primary"
+              color="success"
               variant="contained"
               onClick={this.continue} disabled
             >Continue</Button> : <Button
-            color="primary"
+            color="success"
             variant="contained"
             onClick={this.continue}
           >Continue</Button>}
@@ -78,5 +81,46 @@ export class FormUserDetails extends Component {
     );
   }
 }
+
+const top100Films = [
+  { label: 'Ariyalur' },
+  { label: 'Chengalpet' },
+  { label: 'Chennai' },
+  { label: 'Coimbatore' },
+  { label: 'Cuddalore' },
+  { label: "Dharmapuri" },
+  { label: 'Dindigul' },
+  { label: 'Erode' },
+  { label: 'Kallakurichi' },
+  { label: 'Kancheepuram' },
+  { label: "Karur" },
+  { label: 'Krishnagiri' },
+  { label: 'Madurai' },
+  { label: 'Mayiladuthurai' },
+  { label: 'Nagapattinam' },
+  { label: 'Kanyakumari' },
+  { label: "Namakkal" },
+  { label: 'Perambalur' },
+  { label: 'Pudukottai' },
+  { label: 'Ramanathapuram' },
+  { label: 'Ranipet' },
+  { label: 'Salem' },
+  { label: "Sivagangai" },
+  { label: 'Tenkasi' },
+  { label: 'Thanjavur' },
+  { label: 'Theni' },
+  { label: 'Trichirappalli' },
+  { label: 'Thiruvallur' },
+  { label: "Thiruvarur" },
+  { label: 'Tuticorin' },
+  { label: 'Thirunelveli' },
+  { label: "Tirupathur" },
+  { label: 'Tiruppur' },
+  { label: 'Tiruvannamalai' },
+  { label: "The Nilgiris" },
+  { label: 'Vellore' },
+  { label: 'Viluppuram' },
+  { label: "Virudhunagar" }
+]
 
 export default FormUserDetails;

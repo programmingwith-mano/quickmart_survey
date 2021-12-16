@@ -16,6 +16,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "^3.4.1",
+    "react-spring": "^9.3.2",
     "react-window": "^1.8.6",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
